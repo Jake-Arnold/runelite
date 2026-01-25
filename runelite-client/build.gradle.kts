@@ -46,7 +46,7 @@ java {
 
 dependencies {
     api("net.runelite:runelite-api:${project.version}")
-    implementation(project(":jshell"))
+    implementation("net.runelite:jshell:${project.version}")
     runtimeOnly("net.runelite:injected-client:${project.version}")
 
     api(libs.rl.http.api)
@@ -111,7 +111,7 @@ val shadowJar = tasks.register<Jar>("shadowJar") {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     from(sourceSets.main.get().output)
-    from(configurations.runtimeClasspath.map { it.map { if (it.isDirectory) it else zipTree(it) } })
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 
     exclude(
         "META-INF/INDEX.LIST",
@@ -148,8 +148,6 @@ tasks.withType<net.runelite.gradle.index.IndexTask> {
 }
 
 tasks.processResources {
-    inputs.property("projectVersion", project.version)
-
     val commit = ByteArrayOutputStream()
     exec {
         commandLine("git", "rev-parse", "--short=7", "HEAD")
@@ -202,4 +200,13 @@ tasks.withType<Test> {
 
 tasks.javadoc {
     title = "RuneLite Client ${project.version} API"
+}
+
+tasks.register<JavaExec>("run") {
+    group = "application"
+    description = "Runs the RuneLite client"
+    classpath = sourceSets.main.get().runtimeClasspath
+    mainClass.set("net.runelite.client.RuneLite")
+    jvmArgs("-XX:TieredStopAtLevel=1")
+    systemProperty("runelite.pluginhub.version", "1.12.11")
 }

@@ -1,0 +1,9 @@
+git fetch upstream \
+&& git checkout master \
+&& git merge upstream/master \
+&& git push origin master \
+&& mvn -U -DskipTests clean package \
+&& "/c/Users/Jake/scoop/apps/openjdk17/17.0.2-8/bin/java.exe" \
+   -Drunelite.pluginhub.version=1.12.8 \
+   @"$TEMP/cp_augldr8kemitja1mpbbw9zd4n.argfile" \
+   net.runelite.client.RuneLite

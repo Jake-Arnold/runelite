@@ -1,0 +1,255 @@
+/*
+ * Copyright (c) 2020, Belieal <https://github.com/Belieal>
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *    list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+package net.runelite.client.plugins.flippingutilities;
+
+import net.runelite.client.plugins.flippingutilities.controller.FlippingPlugin;
+import net.runelite.client.plugins.flippingutilities.model.Timestep;
+import net.runelite.client.plugins.flippingutilities.ui.uiutilities.CustomColors;
+import net.runelite.client.config.Config;
+import net.runelite.client.config.ConfigGroup;
+import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.ConfigSection;
+import net.runelite.client.config.Range;
+import net.runelite.client.config.Units;
+import net.runelite.client.ui.ColorScheme;
+
+import java.awt.*;
+
+@ConfigGroup(FlippingPlugin.CONFIG_GROUP)
+public interface FlippingConfig extends Config
+{
+	@ConfigItem(
+		keyName = "roiGradientMax",
+		name = "Set ROI gradient range limit",
+		description = "Set the limit of the range before the gradient is bright green"
+	)
+	@Units(Units.PERCENT)
+	default int roiGradientMax()
+	{
+		return 2;
+	}
+
+	@ConfigItem(
+		keyName = "marginCheckLoss",
+		name = "Account for margin check loss",
+		description = "Subtract the loss from margin checking the item when calculating the total profit"
+	)
+	default boolean marginCheckLoss()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "twelveHourFormat",
+		name = "12 hour format",
+		description = "Shows times in a 12 hour format (AM/PM)"
+	)
+	default boolean twelveHourFormat()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "remainingGELimitProfit",
+		name = "Calculate potential profit from remaining GE limit",
+		description = "If unchecked, the potential profit will be calculated from total GE limit"
+	)
+	default boolean geLimitProfit()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "tradeStagnationTime",
+		name = "Set trade stagnation time",
+		description = "Set how long before the offer slot activity timer indicates that a trade has become stagnant"
+	)
+	@Units(Units.MINUTES)
+	default int tradeStagnationTime()
+	{
+		return 15;
+	}
+
+	@ConfigItem(
+		keyName = "slotTimersEnabled",
+		name = "toggle slot timers",
+		description = "Have a timer on active GE slots that will show the last time an offer came for the slot. This is useful" +
+			"for knowing whether you should change your offer's price"
+	)
+	default boolean slotTimersEnabled()
+	{
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "verboseView",
+		name = "toggle verbose view",
+		description = "show items in the flipping tab with all their tracked info like buy/sell price, roi, potential" +
+			"profit, etc"
+	)
+	default boolean verboseViewEnabled() { return true; }
+
+	@ConfigItem(
+			keyName = "slotTimerBuyTextColor",
+			name = "slot timer buy text color",
+			description = "the color of the buy text on the slot timers"
+	)
+	default Color slotTimerBuyColor() {
+		return ColorScheme.GRAND_EXCHANGE_LIMIT;
+	}
+
+	@ConfigItem(
+			keyName = "slotTimerSellTextColor",
+			name = "slot timer sell text color",
+			description = "the color of the sell text on the slot timers"
+	)
+	default Color slotTimerSellColor() {
+		return ColorScheme.GRAND_EXCHANGE_ALCH;
+	}
+
+	@ConfigSection(
+			name = "Quick lookup",
+			description = "Configure the price graph shown in quick lookup tooltips",
+			position = 50
+	)
+	String priceGraphSection = "priceGraphSection";
+
+	@ConfigItem(
+			keyName = "priceGraphEnabled",
+			name = "Enable price graph",
+			description = "Show price history graph in quick lookup tooltips",
+			section = priceGraphSection,
+			position = 1
+	)
+	default boolean priceGraphEnabled() {
+		return true;
+	}
+
+	@ConfigItem(
+			keyName = "priceGraphTimestep",
+			name = "Time range",
+			description = "Select the time range for the price graph",
+			section = priceGraphSection,
+			position = 2
+	)
+	default Timestep priceGraphTimestep() {
+		return Timestep.FIVE_MINUTES;
+	}
+
+	@ConfigSection(
+			name = "Auto-Save",
+			description = "Configure automatic saving of trade data",
+			position = 100
+	)
+	String autoSaveSection = "autoSaveSection";
+
+	@ConfigItem(
+			keyName = "autoSaveEnabled",
+			name = "Enable auto-save",
+			description = "Automatically save trade data at regular intervals to prevent data loss on crashes",
+			section = autoSaveSection,
+			position = 1
+	)
+	default boolean autoSaveEnabled() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "autoSaveInterval",
+			name = "Auto-save interval",
+			description = "How often to automatically save trade data (in minutes)",
+			section = autoSaveSection,
+			position = 2
+	)
+	@Units(Units.MINUTES)
+	@Range(min = 1)
+	default int autoSaveInterval() {
+		return 10;
+	}
+
+	@ConfigItem(
+			keyName = "showAutoSaveDisplay",
+			name = "Show countdown timer",
+			description = "Display the countdown timer in the stats panel",
+			section = autoSaveSection,
+			position = 3
+	)
+	default boolean showAutoSaveDisplay() {
+		return true;
+	}
+
+	@ConfigSection(
+			name = "Custom Recipes",
+			description = "Settings for custom recipe search",
+			position = 110
+	)
+	String customRecipesSection = "customRecipesSection";
+
+	@ConfigItem(
+			keyName = "includeNotedItems",
+			name = "Include noted items",
+			description = "Show noted versions of items when searching for recipe ingredients",
+			section = customRecipesSection,
+			position = 1
+	)
+	default boolean includeNotedItems() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "includeUntradeableItems",
+			name = "Include untradeable items",
+			description = "Show items that cannot be traded on the Grand Exchange",
+			section = customRecipesSection,
+			position = 2
+	)
+	default boolean includeUntradeableItems() {
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "defaultRecipeSort",
+			name = "Default sort option",
+			description = "How your custom recipes are sorted when you open the manager",
+			section = customRecipesSection,
+			position = 3
+	)
+	default RecipeSortOption defaultRecipeSort() {
+		return RecipeSortOption.INPUT_COUNT;
+	}
+
+	@ConfigItem(
+			keyName = "defaultRecipeSortDirection",
+			name = "Default sort direction",
+			description = "Sort order for custom recipes (ascending or descending)",
+			section = customRecipesSection,
+			position = 4
+	)
+	default SortDirection defaultRecipeSortDirection() {
+		return SortDirection.ASCENDING;
+	}
+}
