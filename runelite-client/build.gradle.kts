@@ -205,6 +205,7 @@ tasks.javadoc {
 tasks.register<JavaExec>("run") {
     group = "application"
     description = "Runs the RuneLite client"
+    dependsOn(tasks.named("classes"))
     classpath = sourceSets.main.get().runtimeClasspath
     mainClass.set("net.runelite.client.RuneLite")
     jvmArgs("-XX:TieredStopAtLevel=1")

@@ -100,6 +100,78 @@ public class DpsCalculator
 	}
 
 	/**
+	 * Calculate DPS for melee combat with explicit attack type and style bonuses
+	 */
+	public static DpsResult calculateMeleeDps(
+		int attackLevel,
+		int strengthLevel,
+		int attackBonus,
+		int strengthBonus,
+		int attackSpeed,
+		AttackType attackType,
+		int styleAttackBonus,
+		int styleStrengthBonus,
+		NpcStats npc,
+		DpsCalculatorConfig.MeleePrayer prayer,
+		DpsCalculatorConfig.PotionBoost potion,
+		boolean onSlayerTask,
+		boolean voidSet,
+		double specialMultiplier)
+	{
+		int boostedAttack = applyPotionBoost(attackLevel, potion);
+		int boostedStrength = applyPotionBoost(strengthLevel, potion);
+
+		double prayerAttackMult = prayer.getAttackMultiplier();
+		double prayerStrengthMult = prayer.getStrengthMultiplier();
+
+		int effectiveAttack = (int) ((boostedAttack * prayerAttackMult) + styleAttackBonus + 8);
+		int effectiveStrength = (int) ((boostedStrength * prayerStrengthMult) + styleStrengthBonus + 8);
+
+		if (voidSet)
+		{
+			effectiveAttack = (int) (effectiveAttack * 1.10);
+			effectiveStrength = (int) (effectiveStrength * 1.10);
+		}
+
+		double slayerMult = onSlayerTask ? 7.0 / 6.0 : 1.0;
+
+		int maxAttackRoll = (int) (effectiveAttack * (attackBonus + 64) * slayerMult * specialMultiplier);
+
+		int maxHit = (int) Math.floor(0.5 + (effectiveStrength * (strengthBonus + 64) / 640.0));
+		maxHit = (int) (maxHit * slayerMult * specialMultiplier);
+
+		int npcDefenceBonus = getDefenceBonusForAttackType(npc, attackType);
+		int maxDefenceRoll = (npc.getDefenceLevel() + 9) * (npcDefenceBonus + 64);
+
+		double accuracy;
+		if (maxAttackRoll > maxDefenceRoll)
+		{
+			accuracy = 1.0 - ((double) (maxDefenceRoll + 2) / (2 * (maxAttackRoll + 1)));
+		}
+		else
+		{
+			accuracy = (double) maxAttackRoll / (2 * (maxDefenceRoll + 1));
+		}
+
+		double attackInterval = attackSpeed * 0.6;
+		double dps = (accuracy * maxHit) / (2.0 * attackInterval);
+
+		double expectedHitsToKill = npc.getHitpoints() / (accuracy * maxHit / 2.0);
+		double timeToKill = expectedHitsToKill * attackInterval;
+
+		return DpsResult.builder()
+			.dps(dps)
+			.maxHit(maxHit)
+			.accuracy(accuracy * 100)
+			.maxAttackRoll(maxAttackRoll)
+			.maxDefenceRoll(maxDefenceRoll)
+			.attackSpeed(attackSpeed)
+			.timeToKill(timeToKill)
+			.combatStyle(attackType != null ? attackType.getName() : "Melee")
+			.build();
+	}
+
+	/**
 	 * Calculate DPS for ranged combat
 	 */
 	public static DpsResult calculateRangedDps(
@@ -282,6 +354,44 @@ public class DpsCalculator
 				return npc.getDefenceCrush();
 			default:
 				return npc.getDefenceStab();
+		}
+	}
+
+	private static int getDefenceBonusForAttackType(NpcStats npc, AttackType attackType)
+	{
+		if (attackType == null)
+		{
+			return npc.getDefenceStab();
+		}
+
+		switch (attackType)
+		{
+			case SLASH:
+				return npc.getDefenceSlash();
+			case CRUSH:
+				return npc.getDefenceCrush();
+			case STAB:
+			default:
+				return npc.getDefenceStab();
+		}
+	}
+
+	public enum AttackType
+	{
+		STAB("Stab"),
+		SLASH("Slash"),
+		CRUSH("Crush");
+
+		private final String name;
+
+		AttackType(String name)
+		{
+			this.name = name;
+		}
+
+		public String getName()
+		{
+			return name;
 		}
 	}
 
