@@ -35,6 +35,20 @@ for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
 @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
 
+@rem Prefer repo-local JDKs before PATH Java resolution.
+if not defined JAVA_HOME (
+    if exist "%APP_HOME%jdk-11\bin\java.exe" set "JAVA_HOME=%APP_HOME%jdk-11"
+)
+if not defined JAVA_HOME (
+    if exist "%APP_HOME%jdk11\bin\java.exe" set "JAVA_HOME=%APP_HOME%jdk11"
+)
+if not defined JAVA_HOME (
+    if exist "%APP_HOME%jdk\bin\java.exe" set "JAVA_HOME=%APP_HOME%jdk"
+)
+if not defined JAVA_HOME (
+    if exist "%ProgramFiles%\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin\java.exe" set "JAVA_HOME=%ProgramFiles%\Eclipse Adoptium\jdk-17.0.17.10-hotspot"
+)
+
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
 

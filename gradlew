@@ -116,6 +116,17 @@ esac
 
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
+# Prefer repo-local JDKs when JAVA_HOME is unset.
+if [ -z "$JAVA_HOME" ] ; then
+    for candidate in "$APP_HOME/jdk-11" "$APP_HOME/jdk11" "$APP_HOME/jdk"
+    do
+        if [ -x "$candidate/bin/java" ] ; then
+            JAVA_HOME=$candidate
+            break
+        fi
+    done
+fi
+
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then

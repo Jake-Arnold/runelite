@@ -208,6 +208,12 @@ tasks.register<JavaExec>("run") {
     dependsOn(tasks.named("classes"))
     classpath = sourceSets.main.get().runtimeClasspath
     mainClass.set("net.runelite.client.RuneLite")
-    jvmArgs("-XX:TieredStopAtLevel=1")
+    jvmArgs(
+        "-XX:TieredStopAtLevel=1",
+        "-Dsun.java2d.uiScale=1",
+        "-Dsun.java2d.opengl=false",
+        "-Dsun.java2d.d3d=false",
+        "-Dswing.aatext=true"
+    )
     systemProperty("runelite.pluginhub.version", "1.12.11")
 }
