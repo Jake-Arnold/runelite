@@ -52,7 +52,6 @@ import net.runelite.api.GameObject;
 import net.runelite.api.GameState;
 import net.runelite.api.Model;
 import net.runelite.api.Perspective;
-import net.runelite.api.Player;
 import net.runelite.api.Projection;
 import net.runelite.api.Renderable;
 import net.runelite.api.Scene;
@@ -1231,12 +1230,13 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 
 		Renderable renderable = gameObject.getRenderable();
 		int size = m.getFaceCount() * 3 * VAO.VERT_SIZE;
-		if (renderable instanceof Player || m.getFaceTransparencies() != null)
+		int renderMode = renderable.getRenderMode();
+		if (renderMode == Renderable.RENDERMODE_SORTED_NO_DEPTH || m.getFaceTransparencies() != null)
 		{
 			// opaque player faces have their own vao and are drawn in a separate pass from normal opaque faces
 			// because they are not depth tested. transparent player faces don't need their own vao because normal
 			// transparent faces are already not depth tested
-			VAO o = renderable instanceof Player ? vaoPO.get(size) : vaoO.get(size);
+			VAO o = renderMode == Renderable.RENDERMODE_SORTED_NO_DEPTH ? vaoPO.get(size) : vaoO.get(size);
 			VAO a = vaoA.get(size);
 
 			int start = a.vbo.vb.position();
@@ -1657,6 +1657,8 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 			}
 		}
 
+		Map<Integer, Integer> roofChanges = new HashMap<>();
+
 		// find zones which overlap and copy them
 		Zone[][] newZones = new Zone[SCENE_ZONES][SCENE_ZONES];
 		final GameState gameState = client.getGameState();
@@ -1665,6 +1667,9 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 		{
 			int[][][] prevTemplates = prev.getInstanceTemplateChunks();
 			int[][][] curTemplates = scene.getInstanceTemplateChunks();
+
+			int[][][] prids = prev.getRoofs();
+			int[][][] nrids = scene.getRoofs();
 
 			for (int x = 0; x < SCENE_ZONES; ++x)
 			{
@@ -1713,6 +1718,37 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 						}
 
 						assert old.sizeO > 0 || old.sizeA > 0;
+
+						// Roof ids aren't consistent between scenes, so build a mapping of old -> new roof ids
+						// Sometimes groups split or merge, so we can't copy the zone in that case
+						for (int level = 0; level < 4; level++)
+						{
+							for (int tx = 0; tx < 8; tx++)
+							{
+								for (int tz = 0; tz < 8; tz++)
+								{
+									int prid = prids[level][(ox << 3) + tx][(oz << 3) + tz];
+									int nrid = nrids[level][(x << 3) + tx][(z << 3) + tz];
+
+									if (prid != nrid && (prid == 0 || nrid == 0))
+									{
+										log.trace("Roof mismatch: {} -> {}", prid, nrid);
+										continue next;
+									}
+
+									Integer orid = roofChanges.putIfAbsent(prid, nrid);
+									if (orid == null)
+									{
+										log.trace("Roof change: {} -> {}", prid, nrid);
+									}
+									else if (orid != nrid)
+									{
+										log.trace("Roof mismatch: {} -> {} vs {}", prid, nrid, orid);
+										continue next;
+									}
+								}
+							}
+						}
 
 						assert old.cull;
 						old.cull = false;
@@ -1826,51 +1862,6 @@ public class GpuPlugin extends Plugin implements DrawCallbacks
 			}
 		}
 		log.debug("Scene upload time {}", sw);
-
-		// Roof ids aren't consistent between scenes, so build a mapping of old -> new roof ids
-		Map<Integer, Integer> roofChanges;
-		{
-			int[][][] prids = prev.getRoofs();
-			int[][][] nrids = scene.getRoofs();
-			dx <<= 3;
-			dy <<= 3;
-			roofChanges = new HashMap<>();
-
-			sw = Stopwatch.createStarted();
-			for (int level = 0; level < 4; ++level)
-			{
-				for (int x = 0; x < Constants.EXTENDED_SCENE_SIZE; ++x)
-				{
-					for (int z = 0; z < Constants.EXTENDED_SCENE_SIZE; ++z)
-					{
-						int ox = x + dx;
-						int oz = z + dy;
-
-						// old zone still in scene?
-						if (ox >= 0 && oz >= 0 && ox < Constants.EXTENDED_SCENE_SIZE && oz < Constants.EXTENDED_SCENE_SIZE)
-						{
-							int prid = prids[level][ox][oz];
-							int nrid = nrids[level][x][z];
-							if (prid > 0 && nrid > 0 && prid != nrid)
-							{
-								Integer old = roofChanges.putIfAbsent(prid, nrid);
-								if (old == null)
-								{
-									log.trace("Roof change: {} -> {}", prid, nrid);
-								}
-								else if (old != nrid)
-								{
-									log.debug("Roof change mismatch: {} -> {} vs {}", prid, nrid, old);
-								}
-							}
-						}
-					}
-				}
-			}
-			sw.stop();
-
-			log.debug("Roof remapping time {}", sw);
-		}
 
 		nextZones = newZones;
 		nextRoofChanges = roofChanges;

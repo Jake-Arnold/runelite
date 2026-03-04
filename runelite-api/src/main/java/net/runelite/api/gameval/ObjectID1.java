@@ -29742,7 +29742,7 @@ class ObjectID1
 	 * Tree
 	 */
 	public static final int REGICIDE_TREE_DEAD1SWAMP_WEB = 42649;
-	public static final int QUEST_START_ICON_TUTORIAL = 42650;
+	public static final int VM_BASEMENT_WALL_GROUND_FLOOR_NOBACK = 42650;
 	public static final int QUEST_START_ICON_ANIMALMAGNETISM = 42651;
 	public static final int QUEST_START_ICON_ANOTHERSLICEOFHAM = 42652;
 	public static final int QUEST_START_ICON_ASCENTOFARCEUUS = 42653;
@@ -40162,18 +40162,17 @@ class ObjectID1
 	public static final int WILD_CAVE_EXIT01 = 47175;
 	public static final int GREYBOX_TOMB_WALL02_DARK01 = 47176;
 	public static final int GREYBOX_TOMB_WALL02_DARK02 = 47177;
-	public static final int OSB10_HOLIDAY_ICON = 47178;
+
+	/**
+	 * Thick Web
+	 */
+	public static final int HOSDUN_SARACHNIS_ENTRANCE_INSTANCE = 47178;
 	public static final int OSB10_TABLE = 47179;
 
 	/**
 	 * Warmhandz' Fire
 	 */
 	public static final int OSB10_WARMFIRE = 47180;
-	public static final int OSB10_BUNTING01_POST01_VARIANT01 = 47181;
-	public static final int OSB10_BUNTING01_POST01_VARIANT02 = 47182;
-	public static final int OSB10_BUNTING01_POST01_VARIANT03 = 47183;
-	public static final int OSB10_BUNTING01_POST01_VARIANT04 = 47184;
-	public static final int OSB10_BUNTING01_MIDDLE01_VARIANT01 = 47185;
 	public static final int OSB10_BANNER01_YEAR10 = 47186;
 	public static final int OSB10_BANNER01_YEAR10_RAISED01 = 47187;
 
@@ -40216,20 +40215,6 @@ class ObjectID1
 	 * Birthday plushies
 	 */
 	public static final int OSB10_TOYS01_GNOMECHILD10_SOLO01 = 47195;
-	public static final int OSB10_CONFETTI01_DEFAULT01 = 47196;
-	public static final int OSB10_CONFETTI01_SPARSE01 = 47197;
-	public static final int OSB10_CONFETTI01_CORNER01 = 47198;
-	public static final int OSB10_CONFETTI01_SPARSE02 = 47199;
-
-	/**
-	 * Birthday cake
-	 */
-	public static final int OSB10_CAKE_UNLIT = 47200;
-
-	/**
-	 * Birthday cake
-	 */
-	public static final int OSB10_CAKE_LIT = 47201;
 	public static final int OSB10_PARTYROOM_DOORL_NOOP = 47202;
 	public static final int OSB10_PARTYROOM_DOORR_NOOP = 47203;
 
@@ -40547,7 +40532,6 @@ class ObjectID1
 	 */
 	public static final int BANNER_BIRTHDAY01_DEFAULT02 = 47321;
 	public static final int PILLAR_MUSEUM01_TALL01 = 47322;
-	public static final int OSB10_CAKE_MULTI = 47323;
 
 	/**
 	 * Ice chunks
@@ -66512,7 +66496,7 @@ class ObjectID1
 	public static final int VMQ4_MOKI_ENTRANCE_STATUE_SUN = 56673;
 
 	/**
-	 * Shrine
+	 * Statue
 	 */
 	public static final int VMQ4_MOKI_ENTRANCE_STATUE_SUN_INACTIVE = 56674;
 
@@ -66523,12 +66507,12 @@ class ObjectID1
 	public static final int VMQ4_MOKI_ENTRANCE_STATUE_MOON = 56676;
 
 	/**
-	 * Shrine
+	 * Statue
 	 */
 	public static final int VMQ4_MOKI_ENTRANCE_STATUE_MOON_INACTIVE = 56677;
 
 	/**
-	 * Shrine
+	 * Statue
 	 */
 	public static final int VMQ4_MOKI_ENTRANCE_STATUE_MOON_ACTIVATED = 56678;
 	public static final int VMQ4_SUN_PUZZLE_STATUE = 56679;
@@ -71680,16 +71664,9 @@ class ObjectID1
 	public static final int TRR_CORAL_DREDGER_FIXED = 58501;
 
 	/**
-	 * Coral refiner
+	 * Tile
 	 */
-	public static final int TRR_CORAL_REFINER = 58502;
-
-	/**
-	 * Anchor
-	 */
-	public static final int TRR_ANCHOR_BOTTOM = 58503;
-	public static final int TRR_ANCHOR_MIDDLE = 58504;
-	public static final int TRR_ANCHOR_TOP = 58505;
+	public static final int _25TH_GRID_BLANK = 58502;
 	public static final int TRR_PIER_SUPPORT_PILLAR01A = 58506;
 	public static final int TRR_PIER_SUPPORT_STRAIGHT01A = 58507;
 	public static final int TRR_PIER_SUPPORT_CORNER_OUTSIDE01A = 58508;
@@ -75085,7 +75062,7 @@ class ObjectID1
 	public static final int SAILING_KEG_WHIRLPOOL_SURPRISE = 59694;
 
 	/**
-	 * Keg of kraken ink sout
+	 * Keg of kraken ink stout
 	 */
 	public static final int SAILING_KEG_KRAKEN_INK_STOUT = 59695;
 
@@ -77574,17 +77551,17 @@ class ObjectID1
 	public static final int CIVITAS_TABLE_RICH_1_SMALL1 = 60527;
 
 	/**
-	 * Red Coral
+	 * Red coral
 	 */
 	public static final int RED_CORAL01_1X1 = 60528;
 
 	/**
-	 * Red Coral
+	 * Red coral
 	 */
 	public static final int RED_CORAL01_2X2 = 60529;
 
 	/**
-	 * Red Coral
+	 * Red coral
 	 */
 	public static final int RED_CORAL01_3X2 = 60530;
 	public static final int BGSOUND_SAILING_STOMRY_SEAS_WATER_WIND_LOOP_01 = 60531;
@@ -78056,8 +78033,12 @@ class ObjectID1
 	 */
 	public static final int SAILING_BOAT_CARGO_HOLD_ROSEWOOD_LARGE_CARGO = 60642;
 	public static final int DEADMAN_DUNGEON_CORRIDORFILLER = 60643;
-	public static final int DEADMAN_DUNGEON_CORRIDORFILLERL = 60644;
-	public static final int DEADMAN_DUNGEON_CORRIDORFILLERR = 60645;
+	public static final int QUEST_START_ICON_LEARNINGTHEROPES = 60644;
+
+	/**
+	 * Diving bell
+	 */
+	public static final int TRR_DIVING_BELL = 60645;
 	public static final int BLACK_WALL02 = 60646;
 
 	/**
@@ -78129,5 +78110,392 @@ class ObjectID1
 	 * Window space
 	 */
 	public static final int POH_CHAPELWINDOW_HOTSPOT_DEADMAN = 60660;
+	public static final int DEADMAN_DUNGEON_INSIDEWALL_SIDER = 60661;
+	public static final int DEADMAN_DUNGEON_INSIDEWALL_SIDEL = 60662;
+
+	/**
+	 * Crane
+	 */
+	public static final int TRR_DIVING_BELL_CRANE = 60663;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_CORNER1_PURPLE = 60664;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_CORNER2_PURPLE = 60665;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_INVERSE_PURPLE = 60666;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_ROCK1_PURPLE = 60667;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_ROCK2_PURPLE = 60668;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_SIDE1_PURPLE = 60669;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_SIDE2_PURPLE = 60670;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_TOP1_PURPLE = 60671;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_TOP2_PURPLE = 60672;
+
+	/**
+	 * Coral
+	 */
+	public static final int _100_CORAL_LACE_TOP3_PURPLE = 60673;
+	public static final int TRR_ROCKS_BIG01 = 60674;
+	public static final int TRR_ROCKS_BIG02 = 60675;
+	public static final int OCEAN_OUTCROP_UNDERWATER01 = 60676;
+	public static final int OCEAN_OUTCROP_UNDERWATER02 = 60677;
+	public static final int OCEAN_OUTCROP_UNDERWATER03 = 60678;
+	public static final int OCEAN_OUTCROP_UNDERWATER04 = 60679;
+	public static final int CORAL_SEABED_LOW_WALL = 60680;
+
+	/**
+	 * Fountain
+	 */
+	public static final int FOUNTAIN_2X3 = 60681;
+
+	/**
+	 * Ladder
+	 */
+	public static final int _25TH_LADDER_BOTTOM = 60731;
+
+	/**
+	 * Ladder
+	 */
+	public static final int _25TH_LADDER_TOP = 60732;
+
+	/**
+	 * Birthday Banner
+	 */
+	public static final int BIRTHDAY_BANNER01_YEAR_STANDING01 = 60745;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING01 = 60746;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING02 = 60747;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING03 = 60748;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING04 = 60749;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING05 = 60750;
+	public static final int BIRTHDAY_BANNER01_YEAR_HANGING06 = 60751;
+	public static final int BIRTHDAY_BANNER01_ANNI25_HANGING01 = 60752;
+	public static final int BIRTHDAY_BANNER01_ANNI25_HANGING02 = 60753;
+	public static final int BIRTHDAY_BANNER01_ANNI25_HANGING03 = 60754;
+	public static final int BIRTHDAY_BANNER01_ANNI25_HANGING04 = 60755;
+
+	/**
+	 * Birthday Banner
+	 */
+	public static final int BIRTHDAY_BANNER01_ANNI25_STANDING01 = 60756;
+	public static final int BIRTHDAY_BUNTING01_MIDDLE01_OFFSET01 = 60757;
+	public static final int BIRTHDAY_BUNTING01_MIDDLE01_VARIANT02_CORNER = 60758;
+
+	/**
+	 * Web
+	 */
+	public static final int SARACHNIS_WEB_NOOP = 60759;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_R_COWBOSS_START = 60760;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_L_COWBOSS_START_NOOP = 60761;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_R_COWBOSS_START_NOOP = 60762;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_L_COWBOSS_START = 60763;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_R_COWBOSS_EXIT = 60764;
+
+	/**
+	 * Gate
+	 */
+	public static final int FENCEGATE_L_COWBOSS_EXIT = 60765;
+	public static final int COWBOSS_SCOREBOARD_MULTI = 60766;
+
+	/**
+	 * Scoreboard
+	 */
+	public static final int COWBOSS_SCOREBOARD = 60767;
+
+	/**
+	 * Scoreboard
+	 */
+	public static final int COWBOSS_SCOREBOARD_UBER = 60768;
+
+	/**
+	 * Warning Sign
+	 */
+	public static final int COWBOSS_SIGN_WARNING = 60769;
+	public static final int COWBOSS_DEMONIC_POTATO_MULTI = 60770;
+
+	/**
+	 * Growth
+	 */
+	public static final int COWBOSS_DEMONIC_POTATO_NOOP = 60771;
+
+	/**
+	 * Growth
+	 */
+	public static final int COWBOSS_DEMONIC_POTATO = 60772;
+	public static final int BLOCKING_MILK = 60773;
+
+	/**
+	 * Trollheim Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_TROLLHEIM = 60774;
+
+	/**
+	 * Paddewwa Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_PADDEWWA = 60775;
+
+	/**
+	 * Lassar Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_LASSAR = 60776;
+
+	/**
+	 * Dareeyak Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_DAREEYAK = 60777;
+
+	/**
+	 * Ourania Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_OURANIA = 60778;
+
+	/**
+	 * Barbarian Outpost Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_BARBARIAN = 60779;
+
+	/**
+	 * Port Khazard Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_KHAZARD = 60780;
+
+	/**
+	 * Ice Plateau Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_ICEPLATEAU = 60781;
+
+	/**
+	 * Respawn Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_RESPAWN = 60782;
+
+	/**
+	 * Boat Portal
+	 */
+	public static final int POH_PORTAL_LEAGUE_5_BOAT = 60783;
+	public static final int QUEST_START_ICON_IDESOFMILK = 60784;
+
+	/**
+	 * Shelves
+	 */
+	public static final int COWQUEST_SETH_SHELF = 60785;
+	public static final int ARCHEDCAGE_BLACKBACKA_BOSS_L = 60786;
+	public static final int ARCHEDCAGE_BLACKBACKA_BOSS_R = 60787;
+
+	/**
+	 * Dairy cow
+	 */
+	public static final int FAT_COW_FAWEST = 60788;
+
+	/**
+	 * Portal
+	 */
+	public static final int POH_EXIT_PORTAL_WILDERNESS = 60789;
+
+	/**
+	 * Trollheim Portal
+	 */
+	public static final int POH_PORTAL_TEAK_TROLLHEIM = 60790;
+
+	/**
+	 * Paddewwa Portal
+	 */
+	public static final int POH_PORTAL_TEAK_PADDEWWA = 60791;
+
+	/**
+	 * Lassar Portal
+	 */
+	public static final int POH_PORTAL_TEAK_LASSAR = 60792;
+
+	/**
+	 * Dareeyak Portal
+	 */
+	public static final int POH_PORTAL_TEAK_DAREEYAK = 60793;
+
+	/**
+	 * Ourania Portal
+	 */
+	public static final int POH_PORTAL_TEAK_OURANIA = 60794;
+
+	/**
+	 * Barbarian Outpost Portal
+	 */
+	public static final int POH_PORTAL_TEAK_BARBARIAN = 60795;
+
+	/**
+	 * Port Khazard Portal
+	 */
+	public static final int POH_PORTAL_TEAK_KHAZARD = 60796;
+
+	/**
+	 * Ice Plateau Portal
+	 */
+	public static final int POH_PORTAL_TEAK_ICEPLATEAU = 60797;
+
+	/**
+	 * Respawn Portal
+	 */
+	public static final int POH_PORTAL_TEAK_RESPAWN = 60798;
+
+	/**
+	 * Boat Portal
+	 */
+	public static final int POH_PORTAL_TEAK_BOAT = 60799;
+
+	/**
+	 * Trollheim Portal
+	 */
+	public static final int POH_PORTAL_MAG_TROLLHEIM = 60800;
+
+	/**
+	 * Paddewwa Portal
+	 */
+	public static final int POH_PORTAL_MAG_PADDEWWA = 60801;
+
+	/**
+	 * Lassar Portal
+	 */
+	public static final int POH_PORTAL_MAG_LASSAR = 60802;
+
+	/**
+	 * Dareeyak Portal
+	 */
+	public static final int POH_PORTAL_MAG_DAREEYAK = 60803;
+
+	/**
+	 * Ourania Portal
+	 */
+	public static final int POH_PORTAL_MAG_OURANIA = 60804;
+
+	/**
+	 * Barbarian Outpost Portal
+	 */
+	public static final int POH_PORTAL_MAG_BARBARIAN = 60805;
+
+	/**
+	 * Port Khazard Portal
+	 */
+	public static final int POH_PORTAL_MAG_KHAZARD = 60806;
+
+	/**
+	 * Ice Plateau Portal
+	 */
+	public static final int POH_PORTAL_MAG_ICEPLATEAU = 60807;
+
+	/**
+	 * Respawn Portal
+	 */
+	public static final int POH_PORTAL_MAG_RESPAWN = 60808;
+
+	/**
+	 * Boat Portal
+	 */
+	public static final int POH_PORTAL_MAG_BOAT = 60809;
+
+	/**
+	 * Trollheim Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_TROLLHEIM = 60810;
+
+	/**
+	 * Paddewwa Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_PADDEWWA = 60811;
+
+	/**
+	 * Lassar Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_LASSAR = 60812;
+
+	/**
+	 * Dareeyak Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_DAREEYAK = 60813;
+
+	/**
+	 * Ourania Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_OURANIA = 60814;
+
+	/**
+	 * Barbarian Outpost Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_BARBARIAN = 60815;
+
+	/**
+	 * Port Khazard Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_KHAZARD = 60816;
+
+	/**
+	 * Ice Plateau Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_ICEPLATEAU = 60817;
+
+	/**
+	 * Respawn Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_RESPAWN = 60818;
+
+	/**
+	 * Boat Portal
+	 */
+	public static final int POH_PORTAL_MARBLE_BOAT = 60819;
+	public static final int BOATKIT_SHIPHULL_STRAIGHT01_DAMAGED_L = 60820;
+	public static final int BOATKIT_SHIPHULL_STRAIGHT01_DAMAGED_R = 60821;
+	public static final int BOATKIT_SHIPHULL_STRAIGHT01_DAMAGED_MID = 60822;
+	public static final int BOATKIT_DECK_STRAIGHT01_BROKEN01 = 60823;
+	public static final int BOATKIT_DECK_STRAIGHT01_BROKEN01_MIRROR = 60824;
 /* This file is automatically generated. Do not edit. */
 }

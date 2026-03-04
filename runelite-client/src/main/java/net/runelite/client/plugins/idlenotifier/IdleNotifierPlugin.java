@@ -266,6 +266,7 @@ public class IdleNotifierPlugin extends Plugin
 			case AnimationID.HUMAN_FLETCHING_ADD_BOLT_TIPS_ADAMANT:
 			case AnimationID.HUMAN_FLETCHING_ADD_BOLT_TIPS_RUNE:
 			case AnimationID.HUMAN_FLETCHING_ADD_BOLT_TIPS_DRAGON:
+			case AnimationID.HUMAN_FLETCHING_HUNTINGBOLTS:
 			/* Smithing(Anvil, Furnace, Cannonballs */
 			case AnimationID.HUMAN_SMITHING:
 			case AnimationID.HUMAN_SMITHING_IMCANDO_HAMMER:
@@ -390,6 +391,7 @@ public class IdleNotifierPlugin extends Plugin
 			case AnimationID.HUMAN_MACHINERY_ALCHEMY01_ALEMBIC01_INTERACT01:
 			case AnimationID.HUMAN_MACHINERY_ALCHEMY01_AGITATOR01_INTERACT01:
 			case AnimationID.HUMAN_ALCHEMY01_MILL01_INTERACT01:
+			case AnimationID.HUMAN_HERBING_VIAL_RESTART:
 			/* Magic */
 			case AnimationID.HUMAN_CASTCHARGEORB:
 			case AnimationID.DREAM_PLAYER_MAKE_PLANK_SPELL:
